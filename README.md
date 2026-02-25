@@ -1,43 +1,46 @@
 # Tiny Life Compass
 
-Tiny Life Compass is a small web app that helps people exploring tiny home, skoolie, van, or container living get a quick sense of the real costs involved — before committing.
+Tiny Life Compass is a decision-support web application designed to help users evaluate the financial viability of tiny homes, skoolies, vans, and container builds before committing capital.
 
-The app focuses on cost clarity and decision support, not detailed planning.
+The current version delivers a deterministic client-side cost modeling MVP. Future iterations will expand into AI-assisted interpretation and backend-supported scenario tracking.
 
----
+⸻
 
-## What It Does
+## What It Does (MVP)
 
-Tiny Life Compass collects a short set of inputs about:
-- build type and approach
-- regional cost assumptions
-- estimated build budget
-- ongoing monthly expenses
+The MVP collects structured inputs around:
+	•	Build type and approach
+	•	Regional cost assumptions
+	•	Estimated build budget
+	•	Ongoing monthly expenses
 
-It then calculates:
-- an estimated total build cost
-- an estimated monthly cost
-- a simple verdict about whether the plan looks viable, risky, or unrealistic
+It then generates:
+	•	Projected total build cost
+	•	Estimated monthly carrying cost
+	•	A structured viability classification (viable / moderate risk / high risk)
 
-The goal is to surface potential cost pressure early, not to provide perfect or exhaustive estimates.
+The goal is to surface financial risk early and prevent unrealistic assumptions from progressing further.
 
----
+⸻
 
-## Project Status
+## Planned Evolution
+	•	Backend persistence for user scenarios
+	•	Scenario comparison and saved projections
+	•	AI-assisted interpretation of cost pressure and tradeoffs
+	•	Risk narrative generation and recommendation engine
+	•	Exportable summary reports
 
-This project is currently in active development.
+⸻
 
-Features and assumptions are evolving as the core calculation logic and user flow are refined. More detailed breakdowns and additional guidance may be added in later versions.
+## Tech Stack (Current MVP)
+	•	React + Vite
+	•	Tailwind CSS
+	•	Deterministic client-side calculation engine
+	•	Modular component architecture
 
----
+⸻
 
-## Tech Stack
 
-- React + Vite
-- Tailwind CSS
-- Client-side calculations only
-
-The project was initially scaffolded with Lovable and is now being developed directly in VS Code.
 
 ---
 
