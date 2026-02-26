@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle, AlertTriangle, XCircle, Lock } from 'lucide-react';
 import { SYSTEMS } from '@/data/systems';
 import { Input } from '@/components/ui/input';
@@ -12,16 +12,36 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_7sY6oJamMeOl3r70BL7ok00';
+
 type VehicleType = 'van' | 'skoolie';
 type SystemBudgets = Record<string, number>;
 type SystemChecked = Record<string, boolean>;
+type ComponentCosts = Record<string, number>;
 
 export function SystemChecklist() {
   const [vehicleType, setVehicleType] = useState<VehicleType>('van');
   const [vehiclePrice, setVehiclePrice] = useState<number>(0);
   const [budgets, setBudgets] = useState<SystemBudgets>({});
   const [checked, setChecked] = useState<SystemChecked>({});
+  const [isPaidUnlocked, setIsPaidUnlocked] = useState(false);
+  const [componentCosts, setComponentCosts] = useState<ComponentCosts>({});
 
+  // Check for Stripe session_id on page load and verify payment
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    if (!sessionId) return;
+
+    fetch(`/api/verify-payment?session_id=${sessionId}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.verified) setIsPaidUnlocked(true);
+      })
+      .catch(() => {});
+  }, []);
+
+  // Free tier derived values
   const systemsTotal = Object.values(budgets).reduce((sum, v) => sum + v, 0);
   const totalBudget = vehiclePrice + systemsTotal;
   const checkedCount = Object.values(checked).filter(Boolean).length;
@@ -35,6 +55,21 @@ export function SystemChecklist() {
     setChecked(prev => ({ ...prev, [systemId]: value }));
   };
 
+  // Paid tier derived values
+  const handleComponentCostChange = (componentId: string, value: string) => {
+    const parsed = parseFloat(value);
+    setComponentCosts(prev => ({ ...prev, [componentId]: isNaN(parsed) ? 0 : parsed }));
+  };
+
+  const systemComponentTotal = (systemId: string) => {
+    const system = SYSTEMS.find(s => s.id === systemId);
+    if (!system) return 0;
+    return system.components.reduce((sum, c) => sum + (componentCosts[c.id] ?? 0), 0);
+  };
+
+  const paidGrandTotal = SYSTEMS.reduce((sum, system) => sum + systemComponentTotal(system.id), 0);
+
+  // Verdict
   let verdictIcon: typeof CheckCircle;
   let verdictLabel: string;
   let verdictClass: string;
@@ -92,6 +127,7 @@ export function SystemChecklist() {
         </div>
       </div>
 
+      {/* Free tier: system cards */}
       {SYSTEMS.map(system => (
         <div key={system.id} className="rounded-lg border border-border p-5 space-y-4">
           {/* System header */}
@@ -166,24 +202,72 @@ export function SystemChecklist() {
           <span className="text-sm font-medium">{verdictLabel}</span>
         </div>
 
-        {/* Paid tier placeholder */}
-        <div className="rounded-lg border border-dashed border-border bg-muted/30 p-5 space-y-3">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Lock className="h-4 w-4 flex-shrink-0" />
-            <span className="text-sm font-medium">Detailed Breakdown</span>
+        {/* Paid tier: locked placeholder or unlocked view */}
+        {isPaidUnlocked ? (
+          <div className="space-y-4 pt-2">
+            <h3 className="text-base font-semibold text-foreground">Detailed Breakdown</h3>
+
+            {SYSTEMS.map(system => (
+              <div key={system.id} className="rounded-lg border border-border p-5 space-y-3">
+                <div className="flex items-baseline justify-between">
+                  <h4 className="text-sm font-semibold text-foreground">{system.name}</h4>
+                  <span className="text-sm font-medium text-foreground">
+                    ${systemComponentTotal(system.id).toLocaleString()}
+                  </span>
+                </div>
+
+                <ul className="space-y-2">
+                  {system.components.map(component => (
+                    <li key={component.id} className="grid grid-cols-[1fr_auto] items-center gap-4">
+                      <Label
+                        htmlFor={`cost-${component.id}`}
+                        className="text-sm font-normal text-muted-foreground"
+                      >
+                        {component.name}
+                      </Label>
+                      <Input
+                        id={`cost-${component.id}`}
+                        type="number"
+                        min="0"
+                        step="10"
+                        placeholder="0"
+                        value={componentCosts[component.id] ?? ''}
+                        onChange={e => handleComponentCostChange(component.id, e.target.value)}
+                        className="w-32 text-right"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            <div className="flex items-baseline justify-between rounded-lg border border-border bg-secondary/30 px-5 py-4">
+              <span className="text-sm font-semibold text-foreground">Grand total (all components)</span>
+              <span className="text-2xl font-bold text-foreground">
+                ${paidGrandTotal.toLocaleString()}
+              </span>
+            </div>
           </div>
-          <ul className="space-y-1.5 text-sm text-muted-foreground">
-            <li>Individual cost fields for every component in every system</li>
-            <li>Per-zone cost breakdown</li>
-            <li>Exportable summary</li>
-          </ul>
-          <button
-            type="button"
-            className="mt-1 w-full rounded-md bg-foreground px-4 py-2.5 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
-          >
-            Unlock Full Breakdown — $21
-          </button>
-        </div>
+        ) : (
+          <div className="rounded-lg border border-dashed border-border bg-muted/30 p-5 space-y-3">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Lock className="h-4 w-4 flex-shrink-0" />
+              <span className="text-sm font-medium">Detailed Breakdown</span>
+            </div>
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
+              <li>Individual cost fields for every component in every system</li>
+              <li>Per-zone cost breakdown</li>
+              <li>Exportable summary</li>
+            </ul>
+            <button
+              type="button"
+              onClick={() => { window.location.href = STRIPE_PAYMENT_LINK; }}
+              className="mt-1 w-full rounded-md bg-foreground px-4 py-2.5 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
+            >
+              Unlock Full Breakdown — $21
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
