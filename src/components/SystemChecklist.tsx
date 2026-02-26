@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
+import { CheckCircle, AlertTriangle, XCircle, Lock } from 'lucide-react';
 import { SYSTEMS } from '@/data/systems';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -164,6 +164,25 @@ export function SystemChecklist() {
         <div className={`flex items-center gap-3 rounded-lg border px-4 py-3 ${verdictClass}`}>
           <VerdictIcon className="h-5 w-5 flex-shrink-0" />
           <span className="text-sm font-medium">{verdictLabel}</span>
+        </div>
+
+        {/* Paid tier placeholder */}
+        <div className="rounded-lg border border-dashed border-border bg-muted/30 p-5 space-y-3">
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Lock className="h-4 w-4 flex-shrink-0" />
+            <span className="text-sm font-medium">Detailed Breakdown</span>
+          </div>
+          <ul className="space-y-1.5 text-sm text-muted-foreground">
+            <li>Individual cost fields for every component in every system</li>
+            <li>Per-zone cost breakdown</li>
+            <li>Exportable summary</li>
+          </ul>
+          <button
+            type="button"
+            className="mt-1 w-full rounded-md bg-foreground px-4 py-2.5 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
+          >
+            Unlock Full Breakdown — $21
+          </button>
         </div>
       </div>
     </div>
