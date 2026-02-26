@@ -1,24 +1,7 @@
-import { useState } from 'react';
 import { Compass } from 'lucide-react';
-import { CostForm } from '@/components/CostForm';
-import { ResultsView } from '@/components/ResultsView';
-import { calculateCosts, type FormInputs, type CalculationResult } from '@/lib/costCalculator';
+import { SystemChecklist } from '@/components/SystemChecklist';
 
 const Index = () => {
-  const [result, setResult] = useState<CalculationResult | null>(null);
-
-  const handleSubmit = (inputs: FormInputs) => {
-    const calculationResult = calculateCosts(inputs);
-    setResult(calculationResult);
-    
-    // Scroll to top to show results
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleReset = () => {
-    setResult(null);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <div className="container max-w-2xl py-8 md:py-12">
@@ -37,11 +20,7 @@ const Index = () => {
 
         {/* Main Content */}
         <main className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
-          {result ? (
-            <ResultsView result={result} onReset={handleReset} />
-          ) : (
-            <CostForm onSubmit={handleSubmit} />
-          )}
+          <SystemChecklist />
         </main>
 
         {/* Footer */}
