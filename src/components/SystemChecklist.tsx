@@ -4,15 +4,26 @@ import { SYSTEMS } from '@/data/systems';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
+type VehicleType = 'van' | 'skoolie';
 type SystemBudgets = Record<string, number>;
 type SystemChecked = Record<string, boolean>;
 
 export function SystemChecklist() {
+  const [vehicleType, setVehicleType] = useState<VehicleType>('van');
+  const [vehiclePrice, setVehiclePrice] = useState<number>(0);
   const [budgets, setBudgets] = useState<SystemBudgets>({});
   const [checked, setChecked] = useState<SystemChecked>({});
 
-  const totalBudget = Object.values(budgets).reduce((sum, v) => sum + v, 0);
+  const systemsTotal = Object.values(budgets).reduce((sum, v) => sum + v, 0);
+  const totalBudget = vehiclePrice + systemsTotal;
   const checkedCount = Object.values(checked).filter(Boolean).length;
 
   const handleBudgetChange = (systemId: string, value: string) => {
@@ -46,6 +57,41 @@ export function SystemChecklist() {
 
   return (
     <div className="space-y-5">
+      {/* Vehicle selection */}
+      <div className="rounded-lg border border-border p-5 space-y-4">
+        <h2 className="text-base font-semibold text-foreground">Your Vehicle</h2>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="vehicle-type">Vehicle type</Label>
+          <Select value={vehicleType} onValueChange={v => setVehicleType(v as VehicleType)}>
+            <SelectTrigger id="vehicle-type" className="max-w-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="van">Van</SelectItem>
+              <SelectItem value="skoolie">Skoolie</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="vehicle-price">Vehicle purchase price ($)</Label>
+          <Input
+            id="vehicle-price"
+            type="number"
+            min="0"
+            step="500"
+            placeholder="0"
+            value={vehiclePrice || ''}
+            onChange={e => {
+              const parsed = parseFloat(e.target.value);
+              setVehiclePrice(isNaN(parsed) ? 0 : parsed);
+            }}
+            className="max-w-xs"
+          />
+        </div>
+      </div>
+
       {SYSTEMS.map(system => (
         <div key={system.id} className="rounded-lg border border-border p-5 space-y-4">
           {/* System header */}
