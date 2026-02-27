@@ -290,6 +290,22 @@ export function SystemChecklist() {
                     </li>
                   ))}
                 </ul>
+
+                <div className="flex items-center gap-2.5 pt-1">
+                  <Checkbox
+                    id={`paid-checked-${system.id}`}
+                    checked={checked[system.id] ?? false}
+                    onCheckedChange={(v) =>
+                      handleCheckedChange(system.id, v === true)
+                    }
+                  />
+                  <Label
+                    htmlFor={`paid-checked-${system.id}`}
+                    className="text-sm font-normal cursor-pointer"
+                  >
+                    I have accounted for this system
+                  </Label>
+                </div>
               </div>
             ))}
 
