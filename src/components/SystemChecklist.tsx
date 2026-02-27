@@ -143,7 +143,7 @@ export function SystemChecklist() {
       </div>
 
       {/* Free tier: system cards */}
-      {SYSTEMS.map((system) => (
+      {!isPaidUnlocked && SYSTEMS.map((system) => (
         <div
           key={system.id}
           className="rounded-lg border border-border p-5 space-y-4"
