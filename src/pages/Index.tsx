@@ -6,7 +6,7 @@ const Index = () => {
       <div className="container max-w-2xl pt-2 md:pt-3 pb-8 md:pb-12">
         {/* Header */}
         <header className="text-center mb-10">
-          <div className="mb-1">
+          <div className="-mb-12">
             <img
               src="/Tiny-Life-Compass.png"
               alt="Tiny Life Compass"
