@@ -13,9 +13,6 @@ const Index = () => {
               className="site-logo"
             />
           </div>
-          <h1 className="site-title text-foreground mb-2">
-            Tiny Life Compass
-          </h1>
           <p className="text-muted-foreground max-w-md mx-auto">
             Get a complete cost reality check before committing to tiny, mobile, or alternative living.
           </p>
