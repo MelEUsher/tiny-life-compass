@@ -3,10 +3,10 @@ import { SystemChecklist } from '@/components/SystemChecklist';
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <div className="container max-w-2xl py-8 md:py-12">
+      <div className="container max-w-2xl pt-4 md:pt-6 pb-8 md:pb-12">
         {/* Header */}
         <header className="text-center mb-10">
-          <div className="mb-4">
+          <div className="mb-2">
             <img
               src="/Tiny-Life-Compass.png"
               alt="Tiny Life Compass"
