@@ -32,7 +32,7 @@ const Index = () => {
             © 2026 The Free Range Dev. All rights reserved.
           </p>
           <img
-            src="/Free-Range-Dev-Logo-No Background.png"
+            src="/Free-Range-Dev-Logo-No-Background.png"
             alt="The Free Range Dev"
             className="footer-logo"
           />
