@@ -30,7 +30,7 @@ const Index = () => {
           </p>
           <div className="flex items-center justify-center gap-2.5">
             <img
-              src="/free-range-dev-logo.png"
+              src="/tiny-life-compass.png"
               alt="The Free Range Dev"
               className="h-6 w-auto"
             />
