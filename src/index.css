@@ -114,19 +114,19 @@
 }
 
 @layer components {
-  .verdict-viable {
-    @apply bg-success text-success-foreground;
+  .verdict-banner.verdict-viable {
+    background-color: #a8bdb0;
+    color: #2e2e2e;
+    border-color: #a8bdb0;
   }
 
-  .verdict-risky {
-    @apply bg-warning text-warning-foreground;
+  .verdict-banner.verdict-risky {
+    background-color: #ffbd59;
+    color: #2e2e2e;
+    border-color: #ffbd59;
   }
 
-  .verdict-unrealistic {
-    @apply bg-destructive text-destructive-foreground;
-  }
-
-  .verdict-banner {
+  .verdict-banner.verdict-unrealistic {
     background-color: #9c7f6e;
     color: #f9f8f3;
     border-color: #9c7f6e;
