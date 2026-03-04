@@ -114,6 +114,36 @@
 }
 
 @layer components {
+  .site-title {
+    font-family: 'Kalam', cursive;
+    font-weight: 700;
+  }
+
+  .site-footer {
+    background-color: #f9f8f3;
+    border-top: 1px solid #dddddd;
+    color: #666666;
+  }
+
+  .site-logo {
+    width: 60px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    width: 60px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .footer-logo {
+      width: 100px;
+    }
+  }
+
+
   .verdict-banner.verdict-viable {
     background-color: #a8bdb0;
     color: #2e2e2e;
