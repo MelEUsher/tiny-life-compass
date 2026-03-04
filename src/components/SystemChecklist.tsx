@@ -59,15 +59,15 @@ export function SystemChecklist() {
   if (systemsWithCosts === 6) {
     verdictIcon = CheckCircle;
     verdictLabel = "All systems accounted for";
-    verdictClass = "border-green-200 bg-green-50 text-green-700";
+    verdictClass = "verdict-banner";
   } else if (systemsWithCosts >= 3) {
     verdictIcon = AlertTriangle;
     verdictLabel = "Some systems missing";
-    verdictClass = "border-yellow-200 bg-yellow-50 text-yellow-700";
+    verdictClass = "verdict-banner";
   } else {
     verdictIcon = XCircle;
     verdictLabel = "Major systems unaccounted for";
-    verdictClass = "border-red-200 bg-red-50 text-red-700";
+    verdictClass = "verdict-banner";
   }
 
   const VerdictIcon = verdictIcon;

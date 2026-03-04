@@ -7,28 +7,27 @@
 @layer base {
   :root {
     /* Free Range Dev brand palette */
-    --background: 37 40% 94%;      /* #F5F0E8 cream */
-    --foreground: 24 32% 18%;      /* #3D2B1F dark brown */
+    --background: 143 14% 70%;     /* #a8bdb0 green */
+    --foreground: 0 0% 18%;        /* #2e2e2e charcoal */
 
-    --card: 209 30% 79%;           /* #B8C9D9 soft blue */
-    --card-foreground: 24 32% 18%;
+    --card: 52 33% 96%;            /* #f9f8f3 cream */
+    --card-foreground: 0 0% 18%;
 
-    --popover: 209 30% 79%;
-    --popover-foreground: 24 32% 18%;
+    --popover: 52 33% 96%;
+    --popover-foreground: 0 0% 18%;
 
-    /* Warm orange - primary actions */
-    --primary: 39 80% 55%;         /* #E8A830 */
-    --primary-foreground: 24 32% 18%;
+    /* Orange yellow - primary actions */
+    --primary: 36 100% 67%;        /* #ffbd59 */
+    --primary-foreground: 0 0% 18%;
 
-    /* Light cream for secondary surfaces */
-    --secondary: 37 35% 88%;
-    --secondary-foreground: 24 32% 18%;
+    --secondary: 143 14% 70%;
+    --secondary-foreground: 0 0% 18%;
 
-    --muted: 209 20% 88%;
-    --muted-foreground: 24 20% 42%;
+    --muted: 143 10% 80%;
+    --muted-foreground: 0 0% 38%;
 
-    --accent: 39 80% 90%;
-    --accent-foreground: 39 80% 30%;
+    --accent: 36 100% 90%;
+    --accent-foreground: 0 0% 18%;
 
     /* Verdict colors */
     --success: 145 45% 42%;
@@ -40,21 +39,21 @@
     --destructive: 12 70% 50%;
     --destructive-foreground: 40 20% 98%;
 
-    --border: 209 25% 68%;
-    --input: 209 25% 68%;
-    --ring: 39 80% 55%;
+    --border: 143 12% 58%;
+    --input: 207 30% 72%;          /* #dce8f2-adjacent for input borders */
+    --ring: 191 71% 36%;           /* #1b869d teal */
 
     --radius: 0.625rem;
 
     /* Sidebar defaults */
-    --sidebar-background: 209 30% 79%;
-    --sidebar-foreground: 24 32% 18%;
-    --sidebar-primary: 39 80% 55%;
-    --sidebar-primary-foreground: 24 32% 18%;
-    --sidebar-accent: 37 35% 88%;
-    --sidebar-accent-foreground: 24 32% 18%;
-    --sidebar-border: 209 25% 68%;
-    --sidebar-ring: 39 80% 55%;
+    --sidebar-background: 52 33% 96%;
+    --sidebar-foreground: 0 0% 18%;
+    --sidebar-primary: 36 100% 67%;
+    --sidebar-primary-foreground: 0 0% 18%;
+    --sidebar-accent: 143 14% 70%;
+    --sidebar-accent-foreground: 0 0% 18%;
+    --sidebar-border: 143 12% 58%;
+    --sidebar-ring: 191 71% 36%;
   }
 
   .dark {
@@ -118,12 +117,18 @@
   .verdict-viable {
     @apply bg-success text-success-foreground;
   }
-  
+
   .verdict-risky {
     @apply bg-warning text-warning-foreground;
   }
-  
+
   .verdict-unrealistic {
     @apply bg-destructive text-destructive-foreground;
+  }
+
+  .verdict-banner {
+    background-color: #9c7f6e;
+    color: #f9f8f3;
+    border-color: #9c7f6e;
   }
 }
