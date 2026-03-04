@@ -47,9 +47,7 @@ export function SystemChecklist() {
     vehiclePrice +
     SYSTEMS.reduce((sum, system) => sum + systemComponentTotal(system.id), 0);
 
-  const systemsWithCosts = SYSTEMS.filter(
-    (system) => systemComponentTotal(system.id) > 0,
-  ).length;
+  const systemsWithCosts = Object.values(checked).filter(Boolean).length;
 
   // Verdict
   let verdictIcon: typeof CheckCircle;

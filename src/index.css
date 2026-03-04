@@ -127,8 +127,8 @@
   }
 
   .verdict-banner.verdict-unrealistic {
-    background-color: #9c7f6e;
-    color: #f9f8f3;
-    border-color: #9c7f6e;
+    background-color: #ffbd59;
+    color: #2e2e2e;
+    border-color: #ffbd59;
   }
 }
