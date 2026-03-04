@@ -6,56 +6,55 @@
 
 @layer base {
   :root {
-    /* Warm, grounded palette */
-    --background: 40 20% 98%;
-    --foreground: 220 20% 15%;
+    /* Free Range Dev brand palette */
+    --background: 37 40% 94%;      /* #F5F0E8 cream */
+    --foreground: 24 32% 18%;      /* #3D2B1F dark brown */
 
-    --card: 40 15% 96%;
-    --card-foreground: 220 20% 15%;
+    --card: 209 30% 79%;           /* #B8C9D9 soft blue */
+    --card-foreground: 24 32% 18%;
 
-    --popover: 40 15% 96%;
-    --popover-foreground: 220 20% 15%;
+    --popover: 209 30% 79%;
+    --popover-foreground: 24 32% 18%;
 
-    /* Muted slate - trustworthy, professional */
-    --primary: 220 15% 25%;
-    --primary-foreground: 40 20% 98%;
+    /* Warm orange - primary actions */
+    --primary: 39 80% 55%;         /* #E8A830 */
+    --primary-foreground: 24 32% 18%;
 
-    /* Warm beige secondary */
-    --secondary: 35 25% 92%;
-    --secondary-foreground: 220 15% 25%;
+    /* Light cream for secondary surfaces */
+    --secondary: 37 35% 88%;
+    --secondary-foreground: 24 32% 18%;
 
-    --muted: 35 15% 90%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 209 20% 88%;
+    --muted-foreground: 24 20% 42%;
 
-    /* Sage green accent */
-    --accent: 145 25% 85%;
-    --accent-foreground: 145 40% 25%;
+    --accent: 39 80% 90%;
+    --accent-foreground: 39 80% 30%;
 
     /* Verdict colors */
     --success: 145 45% 42%;
     --success-foreground: 40 20% 98%;
-    
+
     --warning: 38 85% 50%;
     --warning-foreground: 38 90% 15%;
-    
+
     --destructive: 12 70% 50%;
     --destructive-foreground: 40 20% 98%;
 
-    --border: 35 20% 88%;
-    --input: 35 20% 88%;
-    --ring: 220 15% 25%;
+    --border: 209 25% 68%;
+    --input: 209 25% 68%;
+    --ring: 39 80% 55%;
 
     --radius: 0.625rem;
 
     /* Sidebar defaults */
-    --sidebar-background: 40 15% 96%;
-    --sidebar-foreground: 220 20% 15%;
-    --sidebar-primary: 220 15% 25%;
-    --sidebar-primary-foreground: 40 20% 98%;
-    --sidebar-accent: 35 25% 92%;
-    --sidebar-accent-foreground: 220 15% 25%;
-    --sidebar-border: 35 20% 88%;
-    --sidebar-ring: 220 15% 25%;
+    --sidebar-background: 209 30% 79%;
+    --sidebar-foreground: 24 32% 18%;
+    --sidebar-primary: 39 80% 55%;
+    --sidebar-primary-foreground: 24 32% 18%;
+    --sidebar-accent: 37 35% 88%;
+    --sidebar-accent-foreground: 24 32% 18%;
+    --sidebar-border: 209 25% 68%;
+    --sidebar-ring: 39 80% 55%;
   }
 
   .dark {

@@ -24,10 +24,18 @@ const Index = () => {
         </main>
 
         {/* Footer */}
-        <footer className="mt-8 text-center">
+        <footer className="mt-8 space-y-4 text-center">
           <p className="text-xs text-muted-foreground">
             Estimates are approximate. Actual costs vary by location, materials, and individual circumstances.
           </p>
+          <div className="flex items-center justify-center gap-2.5">
+            <img
+              src="/free-range-dev-logo.png"
+              alt="The Free Range Dev"
+              className="h-6 w-auto"
+            />
+            <span className="text-sm text-foreground/70">Made by The Free Range Dev</span>
+          </div>
         </footer>
       </div>
     </div>
