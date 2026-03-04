@@ -6,56 +6,54 @@
 
 @layer base {
   :root {
-    /* Warm, grounded palette */
-    --background: 40 20% 98%;
-    --foreground: 220 20% 15%;
+    /* Free Range Dev brand palette */
+    --background: 143 14% 70%;     /* #a8bdb0 green */
+    --foreground: 0 0% 18%;        /* #2e2e2e charcoal */
 
-    --card: 40 15% 96%;
-    --card-foreground: 220 20% 15%;
+    --card: 52 33% 96%;            /* #f9f8f3 cream */
+    --card-foreground: 0 0% 18%;
 
-    --popover: 40 15% 96%;
-    --popover-foreground: 220 20% 15%;
+    --popover: 52 33% 96%;
+    --popover-foreground: 0 0% 18%;
 
-    /* Muted slate - trustworthy, professional */
-    --primary: 220 15% 25%;
-    --primary-foreground: 40 20% 98%;
+    /* Orange yellow - primary actions */
+    --primary: 36 100% 67%;        /* #ffbd59 */
+    --primary-foreground: 0 0% 18%;
 
-    /* Warm beige secondary */
-    --secondary: 35 25% 92%;
-    --secondary-foreground: 220 15% 25%;
+    --secondary: 143 14% 70%;
+    --secondary-foreground: 0 0% 18%;
 
-    --muted: 35 15% 90%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 143 10% 80%;
+    --muted-foreground: 0 0% 38%;
 
-    /* Sage green accent */
-    --accent: 145 25% 85%;
-    --accent-foreground: 145 40% 25%;
+    --accent: 36 100% 90%;
+    --accent-foreground: 0 0% 18%;
 
     /* Verdict colors */
     --success: 145 45% 42%;
     --success-foreground: 40 20% 98%;
-    
+
     --warning: 38 85% 50%;
     --warning-foreground: 38 90% 15%;
-    
+
     --destructive: 12 70% 50%;
     --destructive-foreground: 40 20% 98%;
 
-    --border: 35 20% 88%;
-    --input: 35 20% 88%;
-    --ring: 220 15% 25%;
+    --border: 143 12% 58%;
+    --input: 207 30% 72%;          /* #dce8f2-adjacent for input borders */
+    --ring: 191 71% 36%;           /* #1b869d teal */
 
     --radius: 0.625rem;
 
     /* Sidebar defaults */
-    --sidebar-background: 40 15% 96%;
-    --sidebar-foreground: 220 20% 15%;
-    --sidebar-primary: 220 15% 25%;
-    --sidebar-primary-foreground: 40 20% 98%;
-    --sidebar-accent: 35 25% 92%;
-    --sidebar-accent-foreground: 220 15% 25%;
-    --sidebar-border: 35 20% 88%;
-    --sidebar-ring: 220 15% 25%;
+    --sidebar-background: 52 33% 96%;
+    --sidebar-foreground: 0 0% 18%;
+    --sidebar-primary: 36 100% 67%;
+    --sidebar-primary-foreground: 0 0% 18%;
+    --sidebar-accent: 143 14% 70%;
+    --sidebar-accent-foreground: 0 0% 18%;
+    --sidebar-border: 143 12% 58%;
+    --sidebar-ring: 191 71% 36%;
   }
 
   .dark {
@@ -116,15 +114,58 @@
 }
 
 @layer components {
-  .verdict-viable {
-    @apply bg-success text-success-foreground;
+  .site-title {
+    font-family: 'Kalam', cursive;
+    font-weight: 700;
+    font-size: 3rem;
   }
-  
-  .verdict-risky {
-    @apply bg-warning text-warning-foreground;
+
+  @media (min-width: 768px) {
+    .site-title {
+      font-size: 4rem;
+    }
   }
-  
-  .verdict-unrealistic {
-    @apply bg-destructive text-destructive-foreground;
+
+  .site-footer {
+    background-color: #f9f8f3;
+    border-top: 1px solid #dddddd;
+    color: #666666;
+  }
+
+  .site-logo {
+    width: 454px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    width: 60px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .footer-logo {
+      width: 100px;
+    }
+  }
+
+
+  .verdict-banner.verdict-viable {
+    background-color: #a8bdb0;
+    color: #2e2e2e;
+    border-color: #a8bdb0;
+  }
+
+  .verdict-banner.verdict-risky {
+    background-color: #ffbd59;
+    color: #2e2e2e;
+    border-color: #ffbd59;
+  }
+
+  .verdict-banner.verdict-unrealistic {
+    background-color: #ffbd59;
+    color: #2e2e2e;
+    border-color: #ffbd59;
   }
 }
