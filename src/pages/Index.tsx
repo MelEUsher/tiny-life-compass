@@ -13,7 +13,7 @@ const Index = () => {
               className="site-logo"
             />
           </div>
-          <h1 className="site-title text-2xl md:text-3xl text-foreground mb-2">
+          <h1 className="site-title text-foreground mb-2">
             Tiny Life Compass
           </h1>
           <p className="text-muted-foreground max-w-md mx-auto">
@@ -32,7 +32,7 @@ const Index = () => {
             © 2026 The Free Range Dev. All rights reserved.
           </p>
           <img
-            src="/Free Range Dev Logo-No Background.png"
+            src="/Free-Range-Dev-Logo-No Background.png"
             alt="The Free Range Dev"
             className="footer-logo"
           />

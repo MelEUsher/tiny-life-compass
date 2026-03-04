@@ -117,6 +117,13 @@
   .site-title {
     font-family: 'Kalam', cursive;
     font-weight: 700;
+    font-size: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .site-title {
+      font-size: 4rem;
+    }
   }
 
   .site-footer {
