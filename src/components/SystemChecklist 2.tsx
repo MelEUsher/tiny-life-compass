@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { CheckCircle, AlertTriangle, XCircle } from "lucide-react";
 import { SYSTEMS } from "@/data/systems";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -16,27 +15,12 @@ import {
 type VehicleType = "van" | "skoolie";
 type ComponentCosts = Record<string, number>;
 type SystemChecked = Record<string, boolean>;
-type ComponentNotes = Record<string, string>;
-type NotesExpanded = Record<string, boolean>;
 
 export function SystemChecklist() {
   const [vehicleType, setVehicleType] = useState<VehicleType>("van");
   const [vehiclePrice, setVehiclePrice] = useState<number>(0);
   const [componentCosts, setComponentCosts] = useState<ComponentCosts>({});
   const [checked, setChecked] = useState<SystemChecked>({});
-  const [componentNotes, setComponentNotes] = useState<ComponentNotes>({});
-  const [notesExpanded, setNotesExpanded] = useState<NotesExpanded>({});
-  const noteRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
-
-  const adjustTextareaHeight = (componentId: string) => {
-    const textarea = noteRefs.current[componentId];
-    if (!textarea) return;
-    textarea.style.height = "auto";
-    const lineHeight = Number.parseFloat(getComputedStyle(textarea).lineHeight) || 20;
-    const maxHeight = lineHeight * 5;
-    textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
-    textarea.style.overflowY = textarea.scrollHeight > maxHeight ? "auto" : "hidden";
-  };
 
   const handleComponentCostChange = (componentId: string, value: string) => {
     const parsed = parseFloat(value);
@@ -49,20 +33,6 @@ export function SystemChecklist() {
   const handleCheckedChange = (systemId: string, value: boolean) => {
     setChecked((prev) => ({ ...prev, [systemId]: value }));
   };
-
-  const handleNotesToggle = (componentId: string) => {
-    setNotesExpanded((prev) => ({ ...prev, [componentId]: !(prev[componentId] ?? false) }));
-  };
-
-  const handleNoteChange = (componentId: string, value: string) => {
-    setComponentNotes((prev) => ({ ...prev, [componentId]: value }));
-  };
-
-  useEffect(() => {
-    Object.entries(notesExpanded).forEach(([componentId, isExpanded]) => {
-      if (isExpanded) adjustTextareaHeight(componentId);
-    });
-  }, [componentNotes, notesExpanded]);
 
   const systemComponentTotal = (systemId: string) => {
     const system = SYSTEMS.find((s) => s.id === systemId);
@@ -159,55 +129,28 @@ export function SystemChecklist() {
 
           <ul className="space-y-2">
             {system.components.map((component) => (
-              <li key={component.id} className="space-y-2">
-                <div className="grid grid-cols-[1fr_auto] items-center gap-4">
-                  <Label
-                    htmlFor={`cost-${component.id}`}
-                    className="text-sm font-normal text-muted-foreground"
-                  >
-                    {component.name}
-                  </Label>
-                  <Input
-                    id={`cost-${component.id}`}
-                    type="number"
-                    min="0"
-                    step="10"
-                    placeholder="0"
-                    value={componentCosts[component.id] ?? ""}
-                    onChange={(e) =>
-                      handleComponentCostChange(component.id, e.target.value)
-                    }
-                    className="w-32 text-right"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <button
-                    type="button"
-                    onClick={() => handleNotesToggle(component.id)}
-                    className="text-sm font-normal text-foreground underline underline-offset-2"
-                  >
-                    {notesExpanded[component.id] ? "Hide Notes" : "Notes"}
-                  </button>
-                  {notesExpanded[component.id] ? (
-                    <Textarea
-                      id={`notes-${component.id}`}
-                      ref={(el) => {
-                        noteRefs.current[component.id] = el;
-                      }}
-                      rows={1}
-                      value={componentNotes[component.id] ?? ""}
-                      onChange={(e) => handleNoteChange(component.id, e.target.value)}
-                      placeholder="component brand, retail location, link, etc"
-                      className="min-h-0 text-sm text-foreground placeholder:text-[hsl(var(--ring))] leading-5 resize-none border border-input bg-card"
-                      style={{
-                        backgroundColor:
-                          (componentNotes[component.id] ?? "").trim() === ""
-                            ? "hsl(var(--card))"
-                            : "hsl(52 33% 92%)",
-                      }}
-                    />
-                  ) : null}
-                </div>
+              <li
+                key={component.id}
+                className="grid grid-cols-[1fr_auto] items-center gap-4"
+              >
+                <Label
+                  htmlFor={`cost-${component.id}`}
+                  className="text-sm font-normal text-muted-foreground"
+                >
+                  {component.name}
+                </Label>
+                <Input
+                  id={`cost-${component.id}`}
+                  type="number"
+                  min="0"
+                  step="10"
+                  placeholder="0"
+                  value={componentCosts[component.id] ?? ""}
+                  onChange={(e) =>
+                    handleComponentCostChange(component.id, e.target.value)
+                  }
+                  className="w-32 text-right"
+                />
               </li>
             ))}
           </ul>
